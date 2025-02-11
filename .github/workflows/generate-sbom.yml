@@ -1,0 +1,52 @@
+name: Generate sbom and cyclonedx with trivy
+
+permissions:
+  contents: write
+
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+      format:
+        description: "Choose the format"
+        type: choice
+        options:
+          - json
+          - spdx
+          - spdx-json
+          - github
+          - cosign-vuln
+          - table
+          - template
+          - sarif
+        default: spdx-json
+      add-cyclonedx:
+        required: true
+        type: boolean
+        default: false
+      publish:
+        required: true
+        type: boolean
+        default: true
+
+env:
+  TRIVY_VERSION: v0.59.1
+
+jobs:
+  generate-sbom:
+    if: inputs.image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin $TRIVY_VERSION
+    
+    - name: Check trivy version
+      run: |
+        trivy version
+    
+    - name: Scan your image and generate sbom
+      run: |
+        trivy image ${{ inputs.image }} --format ${{ inputs.format }}
