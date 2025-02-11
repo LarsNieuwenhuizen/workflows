@@ -36,8 +36,8 @@ jobs:
       id: format-list
       run: |
         IFS=',' read -r -a array <<< "${{ inputs.format }}"
-        formats=$(printf '%s\n' "${array[@]}" | jq -R . | jq -s .)
-        echo "formats=$formats" >> "$GITHUB_OUTPUT"
+        result=$(printf '%s\n' "${array[@]}" | jq -R . | jq -s .)
+        echo "formats=$result" >> "$GITHUB_OUTPUT"
 
   check-matrix:
     needs: create-format-matrix
