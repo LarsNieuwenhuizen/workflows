@@ -1,4 +1,4 @@
-name: Generate sbom and cyclonedx with trivy
+name: Generate sbom and cyclonedx with trivy for image
 
 permissions:
   contents: write
@@ -10,7 +10,7 @@ on:
         required: true
         type: string
       format:
-        description: "format (table,json,template,sarif,cyclonedx,spdx,spdx-json,github,cosign-vuln)"
+        description: "format (table,json,template,sarif,cyclonedx,spdx,spdx-json,github,cosign-vuln) - Give comma separated to create multiple files"
         type: string
         default: spdx-json
       add-cyclonedx:
@@ -26,6 +26,29 @@ env:
   TRIVY_VERSION: v0.59.1
 
 jobs:
+  create-format-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      formats: ${{ steps.format-list.outputs.formats }}
+    
+    steps:
+    - name: Create format array
+      id: format-list
+      run: |
+        formatList=',' read -r -a array <<< ${{ inputs.format }}
+        echo 'formats=$formatList' >>> "$GITHUB_OUTPUT"
+  
+  check-matrix:
+    needs: create-format-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        format: ${{ fromJson(needs.create-format-matrix.outputs.formats) }}
+    steps:
+      - name: Check format
+        run: |
+          echo ${{ matrix.format }}
+
   generate-sbom:
     if: inputs.image
     runs-on: ubuntu-latest
@@ -40,4 +63,9 @@ jobs:
     
     - name: Scan your image and generate sbom
       run: |
-        trivy image ${{ inputs.image }} --format ${{ inputs.format }}
+        trivy image ${{ inputs.image }} --format ${{ inputs.format }} --output sbom
+    
+    - name: Create cyclonedx
+      if: inputs.add-cyclonedx == true
+      run: |
+        trivy
