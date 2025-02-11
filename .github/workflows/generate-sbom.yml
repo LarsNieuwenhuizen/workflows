@@ -10,17 +10,8 @@ on:
         required: true
         type: string
       format:
-        description: "Choose the format"
-        type: choice
-        options:
-          - json
-          - spdx
-          - spdx-json
-          - github
-          - cosign-vuln
-          - table
-          - template
-          - sarif
+        description: "format (table,json,template,sarif,cyclonedx,spdx,spdx-json,github,cosign-vuln)"
+        type: string
         default: spdx-json
       add-cyclonedx:
         required: true
