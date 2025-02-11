@@ -35,7 +35,7 @@ jobs:
     - name: Create format array
       id: format-list
       run: |
-        formatList=',' read -r -a array <<< ${{ inputs.format }}
+        formatList=',' read -r -a array <<< "${{ inputs.format }}"
         echo 'formats="$formatList"' >> "$GITHUB_OUTPUT"
 
   check-matrix:
