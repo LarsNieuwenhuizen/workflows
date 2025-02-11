@@ -30,14 +30,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       formats: ${{ steps.format-list.outputs.formats }}
-    
+
     steps:
     - name: Create format array
       id: format-list
       run: |
         formatList=',' read -r -a array <<< ${{ inputs.format }}
         echo 'formats="$formatList"' >> "$GITHUB_OUTPUT"
-  
+
   check-matrix:
     needs: create-format-matrix
     runs-on: ubuntu-latest
@@ -56,15 +56,15 @@ jobs:
     - name: Install trivy
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin $TRIVY_VERSION
-    
+
     - name: Check trivy version
       run: |
         trivy version
-    
+
     - name: Scan your image and generate sbom
       run: |
         trivy image ${{ inputs.image }} --format ${{ inputs.format }} --output sbom
-    
+
     - name: Create cyclonedx
       if: inputs.add-cyclonedx == true
       run: |
