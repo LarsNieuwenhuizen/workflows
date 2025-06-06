@@ -1,0 +1,40 @@
+name: Run tests on your Go code
+
+on:
+  workflow_call:
+    inputs:
+      project-name:
+        required: true
+        type: string
+        default: 'go-project'
+      go-version:
+        required: true
+        type: string
+        default: '1.23'
+      path:
+        required: true
+        type: string
+        default: '.'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ inputs.go-version }}
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Run tests
+        shell: bash
+        run: |
+          set -o pipefail
+          echo "Running tests for Go project: ${{ inputs.project-name }}" >> $GITHUB_STEP_SUMMARY
+
+          go test -v -cover ${{ inputs.path }} >> $GITHUB_STEP_SUMMARY
