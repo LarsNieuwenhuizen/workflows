@@ -4,15 +4,15 @@ on:
   workflow_call:
     inputs:
       project-name:
-        required: true
+        required: false
         type: string
         default: 'go-project'
       go-version:
-        required: true
+        required: false
         type: string
         default: '1.23'
       path:
-        required: true
+        required: false
         type: string
         default: '.'
 
