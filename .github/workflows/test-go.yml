@@ -3,7 +3,7 @@ name: Run tests on your Go code
 on:
   workflow_call:
     inputs:
-      project-name:
+      name:
         required: false
         type: string
         default: 'go-project'
@@ -35,6 +35,6 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          echo "Running tests for Go project: ${{ inputs.project-name }}" >> $GITHUB_STEP_SUMMARY
+          echo "# Running tests for: ${{ inputs.project-name }} \n\n" >> $GITHUB_STEP_SUMMARY
 
           go test -v -cover ${{ inputs.path }} >> $GITHUB_STEP_SUMMARY

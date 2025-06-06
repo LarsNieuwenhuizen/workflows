@@ -12,14 +12,16 @@ The inputs
 
 | Name         | Required | Type   | Default    | Description                              |
 |--------------|----------|--------|------------|------------------------------------------|
-| project-name | no       | string | go-project | A name just for reference in the summary |
+| name         | no       | string | go-project | A name just for reference in the summary |
 | go-version   | no       | string | 1.23       | The Golang version to use                |
 | path         | no       | string | .          | The path to test, for module pkg use full path |
 
-Example:
+Example usage:
 
+.github/workflows/test.yml
+---
 ```yaml
-name: Testing code
+name: Testing Go code
 
 on:
   workflow_dispatch:
@@ -38,5 +40,6 @@ jobs:
     test:
       uses: LarsNieuwenhuizen/workflows/.github/workflows/test-go.yml@main
       with:
-        path: "."
+        path: "github.com/username/my-application/pkg/example"
+        name: "Example"
 ```
