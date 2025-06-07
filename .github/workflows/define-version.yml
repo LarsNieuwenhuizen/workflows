@@ -3,7 +3,7 @@ name: Define next version of your application
 on:
   workflow_call:
     outputs:
-      release_version:
+      result:
         description: "The next version of your application"
         value: ${{ jobs.version.outputs.release_version }}
 
