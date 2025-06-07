@@ -127,5 +127,5 @@ permissions:
 jobs:
   build-release:
     if: github.event.pull_request.merged == true
-    uses: LarsNieuwenhuizen/workflows/.github/workflows/build-and-release-go.yml@feat/go-build-release-workflow
+    uses: LarsNieuwenhuizen/workflows/.github/workflows/build-and-release-go.yml@main
 ```
