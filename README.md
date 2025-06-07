@@ -2,6 +2,16 @@
 
 Here are some generic reusable workflows you can use in your projects.
 
+Table of contents:
+
+- [Workflows](#workflows)
+  - [Generic](#generic)
+    - [Define the next version for your apps based on commits](#define-the-next-version-for-your-apps-based-on-commits)
+  - [Golang](#golang)
+    - [Testing your code](#testing-your-code)
+    - [Building and releasing Go applications](#building-and-releasing-go-applications)
+
+
 ## Generic
 
 ### Define the next version for your apps based on commits
