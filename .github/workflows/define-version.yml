@@ -3,15 +3,15 @@ name: Define next version of your application
 on:
   workflow_call:
     outputs:
-      release_version:
+      release-version:
         description: "The next version of your application"
-        value: ${{ jobs.version.outputs.release_version }}
+        value: ${{ jobs.version.outputs.release-version }}
 
 jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      release_version: ${{ steps.result.outputs.release_version }}
+      release-version: ${{ steps.result.outputs.release-version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,4 +25,4 @@ jobs:
 
       - name: Set output
         id: result
-        run: echo "release_version=${{ steps.version.outputs.release_version }}" >> $GITHUB_OUTPUT
+        run: echo "release-version=${{ steps.version.outputs.release-version }}" >> $GITHUB_OUTPUT
