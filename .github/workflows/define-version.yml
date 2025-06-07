@@ -1,0 +1,18 @@
+name: Define next version of your application
+
+on:
+  workflow_call:
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Define version
+        id: version
+        uses: LarsNieuwenhuizen/action-define-release-version@v1
