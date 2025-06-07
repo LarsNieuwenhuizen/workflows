@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   version:
-    uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@feat/go-build-release-workflow
+    uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@main
 
   build:
     runs-on: ubuntu-latest
