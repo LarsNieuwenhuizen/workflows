@@ -14,18 +14,4 @@ on:
 
 jobs:
   version:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
-
-      - name: Define version
-        id: version
-        uses: LarsNieuwenhuizen/action-define-release-version@v1
-
-      - name: Use version
-        run: |
-          echo "Version: ${{ steps.version.outputs.release_version }}"
+    uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@feat/go-build-release-workflow
