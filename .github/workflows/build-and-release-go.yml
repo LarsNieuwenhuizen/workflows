@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   version:
-    uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@feat/go-build-release-workflow
+    uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@main
 
   build:
     runs-on: ubuntu-latest
@@ -86,6 +86,6 @@ jobs:
       run: |
         git config user.name "GitHub Actions"
         git config user.email "no-reply@email.com"
-        git commit -m "release: ${{ needs.version.outputs.release_version }}" --allow-empty
+        git commit -m "release: ${{ needs.version.outputs.release-version }}" --allow-empty
         git push origin main --tags
-        gh release create ${{ needs.version.outputs.release_version }} ./bin/*.tar.gz --generate-notes
+        gh release create ${{ needs.version.outputs.release-version }} ./bin/*.tar.gz --generate-notes
