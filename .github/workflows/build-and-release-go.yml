@@ -1,0 +1,27 @@
+name: Build and release Go code
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: false
+        type: string
+        default: 'go-project'
+      go-version:
+        required: false
+        type: string
+        default: '1.23'
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Define version
+        id: version
+        uses: LarsNieuwenhuizen/action-define-release-version@v1
