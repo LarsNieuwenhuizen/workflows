@@ -18,6 +18,8 @@ The outputs:
 
 Example usage:
 
+---
+
 .github/workflows/version.yml
 
 ```yaml
@@ -86,7 +88,11 @@ jobs:
 
 ### Building and releasing Go applications
 
-Build and create a release your Go app
+Build and create a release your Go app.
+
+This workflow defines the next version, builds the app for Linux and Mac and creates a release in your github repo!
+
+`LarsNieuwenhuizen/workflows/.github/workflows/build-and-release-go.yml@main`
 
 > [!IMPORTANT]
 > This workflow creates a release in your Github repository, so it needs write permissions.
@@ -102,6 +108,8 @@ The inputs
 | build-file   | no       | string | main.go    | The default file which will be used in the build command |
 
 Example usage:
+
+---
 
 .github/workflows/build-release.yml
 
