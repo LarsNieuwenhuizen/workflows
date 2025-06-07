@@ -16,6 +16,9 @@ on:
         type: string
         default: 'main.go'
 
+permissions:
+  contents: write
+
 jobs:
   version:
     uses: LarsNieuwenhuizen/workflows/.github/workflows/define-version.yml@feat/go-build-release-workflow
