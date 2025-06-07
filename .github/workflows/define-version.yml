@@ -2,10 +2,16 @@ name: Define next version of your application
 
 on:
   workflow_call:
+    outputs:
+      release_version:
+        description: "The next version of your application"
+        value: ${{ jobs.version.outputs.release_version }}
 
 jobs:
   version:
     runs-on: ubuntu-latest
+    outputs:
+      release_version: ${{ steps.version.outputs.release_version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
