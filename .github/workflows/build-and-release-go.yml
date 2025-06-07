@@ -15,6 +15,10 @@ on:
         required: false
         type: string
         default: 'main.go'
+      target-branch:
+        required: false
+        type: string
+        default: 'main'
 
 permissions:
   contents: write
@@ -87,5 +91,5 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "no-reply@email.com"
         git commit -m "release: ${{ needs.version.outputs.release-version }}" --allow-empty
-        git push origin main --tags
+        git push origin ${{ inputs.target-branch }} --tags
         gh release create ${{ needs.version.outputs.release-version }} ./bin/*.tar.gz --generate-notes
