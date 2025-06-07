@@ -11,7 +11,7 @@ jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      release_version: ${{ steps.version.outputs.release_version }}
+      release_version: ${{ steps.result.outputs.release_version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,4 +24,5 @@ jobs:
         uses: LarsNieuwenhuizen/action-define-release-version@v1
 
       - name: Set output
+        id: result
         run: echo "release_version=${{ steps.version.outputs.release_version }}" >> $GITHUB_OUTPUT
