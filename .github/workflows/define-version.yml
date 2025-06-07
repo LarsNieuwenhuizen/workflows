@@ -22,3 +22,6 @@ jobs:
       - name: Define version
         id: version
         uses: LarsNieuwenhuizen/action-define-release-version@v1
+
+      - name: Set output
+        run: echo "release_version=${{ steps.version.outputs.release_version }}" >> $GITHUB_OUTPUT
